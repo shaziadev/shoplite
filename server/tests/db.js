@@ -14,7 +14,13 @@ async function connect() {
     memoryServer = await MongoMemoryServer.create();
     uri = memoryServer.getUri();
   }
-  await mongoose.connect(uri, { dbName: `shoplite-test-${process.env.JEST_WORKER_ID || 1}` });
+  await mongoose.connect(uri, {
+    dbName: `shoplite-test-${process.env.JEST_WORKER_ID || 1}`,
+    // The MongoDB driver loads `os` with a dynamic import(), which fails inside Jest's
+    // CommonJS sandbox and leaves the handshake without client metadata (the server then
+    // rejects it). Passing the module in directly avoids that.
+    runtimeAdapters: { os: require('os') },
+  });
   // Make sure indexes (e.g. the text index used by ?search=) exist before tests run.
   await Promise.all(Object.values(mongoose.models).map((m) => m.syncIndexes()));
 }
