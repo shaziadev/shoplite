@@ -73,7 +73,7 @@ Open **http://localhost:3000**.
 
 ### Option 2: Run locally
 
-Requires Node.js 20+ and a MongoDB instance (local or MongoDB Atlas).
+Requires Node.js 22+ and a MongoDB instance (local or MongoDB Atlas).
 
 ```bash
 # API
