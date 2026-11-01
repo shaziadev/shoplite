@@ -4,7 +4,10 @@ A small but complete online store: browse and search products, manage a cart, pa
 
 Built with **Node.js, Express, MongoDB and React**, with JWT authentication, role-based access, request validation, automated tests, Docker and GitHub Actions CI.
 
-![Node.js](https://img.shields.io/badge/Node.js-20-339933?logo=node.js&logoColor=white)
+No hosted demo: `docker compose up --build` runs the full stack locally (see [Getting started](#getting-started)).
+
+[![CI](https://github.com/shaziadev/shoplite/actions/workflows/ci.yml/badge.svg)](https://github.com/shaziadev/shoplite/actions/workflows/ci.yml)
+![Node.js](https://img.shields.io/badge/Node.js-22-339933?logo=node.js&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-5-000000?logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-7-47A248?logo=mongodb&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
@@ -26,7 +29,7 @@ Built with **Node.js, Express, MongoDB and React**, with JWT authentication, rol
 
 **Admin**
 - Inventory page to create, edit and delete products (low-stock items are highlighted)
-- Admin-only endpoints to list all orders and change order status (`pending → paid → shipped`)
+- Admin-only endpoints to list all orders and change order status (`pending`, `paid`, `shipped`, `cancelled`)
 
 **Engineering**
 - JWT authentication with `user` and `admin` roles (users can't promote themselves at sign-up)
@@ -164,7 +167,7 @@ The suite uses **Jest** and **Supertest** to call the real Express app and cover
 
 Tests use an in-memory MongoDB ([mongodb-memory-server](https://github.com/typegoose/mongodb-memory-server)) by default, or a real database when `MONGO_URI_TEST` is set (this is what CI does).
 
-## CI/CD
+## CI
 
 `.github/workflows/ci.yml` runs on every push and pull request to `main`:
 

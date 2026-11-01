@@ -21,4 +21,9 @@ if (config.nodeEnv === 'production' && !process.env.JWT_SECRET) {
   throw new Error('JWT_SECRET must be set in production');
 }
 
+// Never "simulate" payments in production: that would give orders away for free.
+if (config.nodeEnv === 'production' && !config.stripeEnabled) {
+  throw new Error('STRIPE_SECRET_KEY must be set in production');
+}
+
 module.exports = config;
